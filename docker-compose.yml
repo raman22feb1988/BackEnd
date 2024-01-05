@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  # Flask API service
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+      - sqlite
+
+  # MongoDB container
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  # SQLite container
+  sqlite:
+    image: sqlite
+    environment:
+      - POSTGRES_DB=user_database
